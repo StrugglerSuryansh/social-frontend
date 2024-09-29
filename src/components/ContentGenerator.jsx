@@ -1,40 +1,26 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function ContentGenerator() {
-    const [content, setContent] = useState('');
-    const [platform, setPlatform] = useState('twitter');
+  const [content, setContent] = useState('');
 
-    const generateContent = async () => {
-        // TODO: Implement API call to backend for content generation
-        const response = await fetch('/api/content/generate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ platform }),
-        });
-        const data = await response.json();
-        setContent(data.content);
-    };
+  const generateContent = async () => {
+    // Simulating API call
+    const data = { content: 'Generated AI content goes here.' };
+    setContent(data.content);
+  };
 
-    return (
-        <div className="space-y-4">
-            <Select value={platform} onValueChange={setPlatform}>
-                <SelectTrigger>
-                    <SelectValue placeholder="Select platform" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="twitter">Twitter</SelectItem>
-                    <SelectItem value="facebook">Facebook</SelectItem>
-                    <SelectItem value="instagram">Instagram</SelectItem>
-                </SelectContent>
-            </Select>
-            <Button onClick={generateContent}>Generate Content</Button>
-            {content && <p className="mt-4 p-4 bg-gray-100 rounded">{content}</p>}
-        </div>
-    );
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Content Generator</h2>
+      <button 
+        onClick={generateContent}
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+      >
+        Generate Content
+      </button>
+      <p className="mt-4 text-gray-700">{content}</p>
+    </div>
+  );
 }
 
 export default ContentGenerator;

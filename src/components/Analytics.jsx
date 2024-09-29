@@ -1,40 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 function Analytics() {
-    const [analytics, setAnalytics] = useState({});
+  const [analytics, setAnalytics] = useState({ engagementRate: 75, totalPosts: 50 });
 
-    useEffect(() => {
-        fetchAnalytics();
-    }, []);
-
+  useEffect(() => {
+    // Simulating API call for analytics
     const fetchAnalytics = async () => {
-        // TODO: Implement API call to backend for analytics
-        const response = await fetch('/api/analytics');
-        const data = await response.json();
-        setAnalytics(data);
+      const data = { engagementRate: 75, totalPosts: 50 };
+      setAnalytics(data);
     };
+    fetchAnalytics();
+  }, []);
 
-    return (
-        <div className="grid grid-cols-2 gap-4">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Engagement Rate</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-2xl font-bold">{analytics.engagementRate}%</p>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Total Posts</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-2xl font-bold">{analytics.totalPosts}</p>
-                </CardContent>
-            </Card>
-        </div>
-    );
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Analytics</h2>
+      <p className="text-gray-700">Engagement Rate: {analytics.engagementRate}%</p>
+      <p className="text-gray-700">Total Posts: {analytics.totalPosts}</p>
+    </div>
+  );
 }
 
 export default Analytics;

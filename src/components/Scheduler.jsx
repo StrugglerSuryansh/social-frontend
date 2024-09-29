@@ -1,40 +1,29 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 function Scheduler() {
-    const [schedule, setSchedule] = useState([]);
+  const [schedule, setSchedule] = useState([]);
 
-    const createSchedule = async () => {
-        // TODO: Implement API call to backend for scheduling
-        const response = await fetch('/api/scheduler/create', { method: 'POST' });
-        const data = await response.json();
-        setSchedule(data.schedule);
-    };
+  const createSchedule = async () => {
+    const data = { schedule: ['Post 1 - Tomorrow', 'Post 2 - Next Week'] };
+    setSchedule(data.schedule);
+  };
 
-    return (
-        <div className="space-y-4">
-            <Button onClick={createSchedule}>Create Schedule</Button>
-            {schedule.length > 0 && (
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Time</TableHead>
-                            <TableHead>Content</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {schedule.map((item, index) => (
-                            <TableRow key={index}>
-                                <TableCell>{item.time}</TableCell>
-                                <TableCell>{item.content}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            )}
-        </div>
-    );
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Content Scheduler</h2>
+      <button 
+        onClick={createSchedule}
+        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+      >
+        Create Schedule
+      </button>
+      <ul className="mt-4 list-disc list-inside">
+        {schedule.map((item, index) => (
+          <li key={index} className="text-gray-700">{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default Scheduler;
